@@ -13,3 +13,7 @@ For committing your code to the master branch, on top where it says "Compare," n
 In the "Summary" field, write something reflecting the changes you've made. Hit "commit to master." This is also another way to know if you are in the master branch, it'll say that instead of the name of the branch you're on.
 
 So that's all there is to it. Just code and commit as you feel is needed. If you don't commit, none of us will see it.
+
+### Understanding the Python code
+---
+I will get around to writing it on Wednesday (2/8) or so.
