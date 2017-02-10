@@ -2,10 +2,10 @@ from util import *
 
 class Player(object):
     """
-    player class. 
-    
-    To test your own machine player strategy, you should implement the ```make_decision()``` method. 
-    To test your implementation, you should modify the configy.py to set one or two player(s) as 'machine' 
+    player class.
+
+    To test your own machine player strategy, you should implement the ```make_decision()``` method.
+    To test your implementation, you should modify the configy.py to set one or two player(s) as 'machine'
     """
 
     def __init__(self, id, name=None):
@@ -20,21 +20,21 @@ class Player(object):
         """
         This function decide next move of the machine player.
 
-        You should only modify '#Your Codes Here' to define you own machine palyer.
+        You should only modify '#Your Code is Here' to define your own machine player.
         To enable your machine player, please check & modify the configuration in config.py.
 
         Args:
-            four_bits (int[]): the four bits number in the LED 
-            next_randoms (int[]): the next 3 random numbers
-            code_digits(int[]): 2 bit code digits.
+            four_bits (int[]): the four bit number in the LED
+            next_randoms (int[]): the next 3 random digits
+            code_digits(int[]): 2 code digits.
         Returns:
             operation: [self.skip | self.add | self.replace]
         	selected: [0|1|2|3]
         """
-        
+
         operation = self.skip
     	selected = 0
-    	
-        
-        
+
+        # Strategy 1
+
     	return operation, selected
