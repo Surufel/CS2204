@@ -9,4 +9,6 @@ SHOW_CODE_DIGIT = True
 #players' name. 
 PLAYER_NAME = ['player0', 'player1']
 #['machine'|'human', 'machine'|'human']
-PLAYER_TYPE = ['machine', 'human']
+PLAYER_TYPE = ['machine', 'machine']
+#PLAYER_TYPE = ['machine', 'human']
+# I think player1 was human and is now machine. Commented out on line 13 is default. 

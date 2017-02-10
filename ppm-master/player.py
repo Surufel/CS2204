@@ -34,5 +34,7 @@ class Player(object):
         
         operation = self.skip
     	selected = 0
-    	#Your Codes Here
+    	
+        
+        
     	return operation, selected
