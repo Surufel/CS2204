@@ -2,9 +2,9 @@ def num_to_str(val, num_sys = 10):
     result = format(val, {2:'b', 10:'d', 16:'x'}[num_sys])
     return result 
 
-def get_adjance(index, arr):
+def get_adjacency(index, arr):
     """
-    get the adjance number. 
+    get the adjacency number. 
     
     Args: 
         index: for an 4-bit array, indexs are[0, 1, 2, 3]
@@ -39,6 +39,10 @@ def get_code_reward(index, arr, code_digits):
     result=0
     if index < 2:
         return result
-    if arr[2] == code_digits[0]: result=result + 1    
-    if arr[3] == code_digits[1]: result=result + 1
+    if (index == 2) & (arr[2] == code_digits[0]):
+        result=result + 1
+        if arr[3] == code_digits[1]: result=result + 1
+    elif (index == 3) & (arr[3] == code_digits[1]):
+        result=result + 1
+        if arr[2] == code_digits[0]: result=result + 1
     return result
