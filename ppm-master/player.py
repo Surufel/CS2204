@@ -44,12 +44,11 @@ class Player(object):
         # If there is an adjacency for replace:
             if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
                 # There is!
-
                 for bitStep in four_bits:
                     if (next_randoms[bitStep] != bitStep):
                         operation = self.replace
                         selected = bitStep
-                     
+
     	return operation, selected
 
         # Attention team: Please refer to experiment1checklist.pdf after all is said and done.
