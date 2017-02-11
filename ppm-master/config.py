@@ -14,3 +14,5 @@ PLAYER_TYPE = ['Machine', 'Machine']
 #PLAYER_TYPE = ['machine', 'human']
 # I think player1 was human and is now machine. Commented out on line 13 is default.
 # Update: The bug was the wrong position of Player 1 and Player 2. So ... line 16 means to say that player1 is machine and well, player0 too.
+
+# Attention team: Please refer to experiment1checklist.pdf after all is said and done.

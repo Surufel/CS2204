@@ -33,8 +33,23 @@ class Player(object):
         """
 
         operation = self.skip
-    	selected = 0
+    	selected = 3 # Playing right most. Refer to line 42.
 
-        # Strategy 1
+        # Test strategy by running: python ppm.py
 
+        # Strategy 1 (for example: 3 A E A and the next random number is A)
+        # Norria: play rightmost, check adjacencies (replace vs add), if no adjacency add to highest #
+
+        # Okay.
+        # If there is an adjacency for replace:
+            if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
+                # There is!
+
+                for bitStep in four_bits:
+                    if (next_randoms[bitStep] != bitStep):
+                        operation = self.replace
+                        selected = bitStep
+                     
     	return operation, selected
+
+        # Attention team: Please refer to experiment1checklist.pdf after all is said and done.
