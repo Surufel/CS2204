@@ -33,22 +33,162 @@ class Player(object):
         """
 
         operation = self.skip
-    	selected = 3 # Playing right most. Refer to line 42.
+    	selected = 0
 
         # Test strategy by running: python ppm.py
 
-        # Strategy 1 (for example: 3 A E A and the next random number is A)
-        # Norria: play rightmost, check adjacencies (replace vs add), if no adjacency add to highest #
+        # Total Strategy
 
-        # Okay.
-        # If there is an adjacency for replace:
-            if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
-                # There is!
-                for bitStep in four_bits:
-                    if (next_randoms[bitStep] != bitStep):
-                        operation = self.replace
-                        selected = bitStep
+        # CASE 0 IF THERE IS NO ADJACENCY: IF RANDOM NUMBER MATCH, CONSIDER IT AN ADJACENCY, REPLACE
+        if (any(four_bits.count(theBit) > 1 for theBit in four_bits) == False):
+            for aBit in four_bits:
+                if aBit == next_randoms[0]:
+                    if four_bits.index(aBit) == 3:
+                        selected = 2
+                    elif four_bits.index(aBit) == 2:
+                        selected = 3
+                    elif four_bits.index(aBit) == 1:
+                        selected = 2
+                    elif four_bits.index(aBit) == 0:
+                        selected = 1
+            operation = self.replace
+            return operation, selected
+
+        # CASE 1: IF THERE IS NO ADJACENCY: IF NO RANDOM NUMBER MATCH, ADD
+        if (any(four_bits.count(theBit) > 1 for theBit in four_bits) == False):
+            operation = self.add
+            selected = four_bits.index(max(four_bits))
+            return operation, selected
+
+        # CASE 2: ONE / CLOSE ADJACENCY AND RANDOM NUMBER MATCH, REPLACE
+        if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
+            startOffset = -1
+            locationOfAdjacencies = []
+            if next_randoms[0] == four_bits[0] or next_randoms[0] == four_bits[1] or next_randoms[0] == four_bits[2] or next_randoms[0] == four_bits[3]:
+                while True:
+                    try:
+                        location = four_bits.index(next_randoms[0], startOffset + 1)
+                    except ValueError:
+                        break
+                    else:
+                        locationOfAdjacencies.append(location)
+                        startOffset = location
+        if four_bits[0] == four_bits[1]:
+            operation = self.replace
+            selected = 2
+            return operation, selected
+        if four_bits[1] == four_bits[2]:
+            operation = self.replace
+            selected = 3
+            return operation, selected
+        if four_bits[2] == four_bits[3]:
+            operation = self.replace
+            selected = 1
+            return operation, selected
+        if four_bits[0] == four_bits[2]:
+            operation = self.replace
+            selected = 1
+            return operation, selected
+        if four_bits[1] == four_bits[3]:
+            operation = self.replace
+            selected = 2
+            return operation, selected
+
+        # CASE 3: ONE / CLOSE ADJACENCY AND NO RANDOM NUMBER MATCH, ADD
+        if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
+            startOffset = -1
+            locationOfAdjacencies = []
+            if next_randoms[0] != four_bits[0] and next_randoms[0] != four_bits[1] and next_randoms[0] != four_bits[2] and next_randoms[0] != four_bits[3]:
+                while True:
+                    try:
+                        location = four_bits.index(next_randoms[0], startOffset + 1)
+                    except ValueError:
+                        break
+                    else:
+                        locationOfAdjacencies.append(location)
+                        startOffset = location
+        if four_bits[0] == four_bits[1] and four_bits[2] < four_bits[3]:
+            operation = self.add
+            selected = 3
+            return operation, selected
+        elif four_bits[0] == four_bits[1] and four_bits[2] > four_bits[3]:
+            operation = self.add
+            selected = 2
+            return operation, selected
+        if four_bits[1] == four_bits[2] and four_bits[0] < four_bits[3]:
+            operation = self.add
+            selected = 3
+            return operation, selected
+        elif four_bits[1] == four_bits[2] and four_bits[0] > four_bits[3]:
+            operation = self.add
+            selected = 0
+            return operation, selected
+        if four_bits[2] == four_bits[3] and four_bits[0] < four_bits[1]:
+            operation = self.add
+            selected = 1
+            return operation, selected
+        elif four_bits[2] == four_bits[3] and four_bits[0] > four_bits[1]:
+            operation = self.add
+            selected = 0
+            return operation, selected
+        if four_bits[0] == four_bits[2] and four_bits[1] < four_bits[3]:
+            operation = self.add
+            selected = 3
+            return operation, selected
+        elif four_bits[0] == four_bits[2] and four_bits[1] > four_bits[3]:
+            operation = self.add
+            selected = 1
+            return operation, selected
+        if four_bits[1] == four_bits[3] and four_bits[0] < four_bits[2]:
+            operation = self.add
+            selected = 2
+            return operation, selected
+        if four_bits[1] == four_bits[3] and four_bits[0] > four_bits[2]:
+            operation = self.add
+            selected = 0
+            return operation, selected
+
+        # CASE 4: TWO / CLOSE ADJACENCY AND RANDOM NUMBER MATCH, REPLACE
+        if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
+            startOffset = -1
+            locationOfAdjacencies = []
+            if next_randoms[0] == four_bits[0] or next_randoms[0] == four_bits[1] or next_randoms[0] == four_bits[2] or next_randoms[0] == four_bits[3]:
+                while True:
+                    try:
+                        location = four_bits.index(next_randoms[0], startOffset + 1)
+                    except ValueError:
+                        break
+                    else:
+                        locationOfAdjacencies.append(location)
+                        startOffset = location
+            if four_bits[0] == four_bits[1] == four_bits[2]:
+                operation = self.replace
+                selected = 3
+                return operation, selected
+            elif four_bits[1] == four_bits[2] == four_bits[3]:
+                operation = self.replace
+                selected = 0
+                return operation, selected
+            elif four_bits[0] == four_bits[1] == four_bits[3]:
+                operation = self.replace
+                selected = 2
+                return operation, selected
+            elif four_bits[0] == four_bits[2] == four_bits[3]:
+                operation = self.replace
+                selected = 1
+                return operation, selected
+
+        # CASE 5: THREE ADJACENCIES
+        if (any(four_bits.count(theBit) > 1 for theBit in four_bits)):
+            if four_bits[0] == four_bits[1] == four_bits[2] == four_bits[3]:
+                operation = self.replace
+                selected = 3
+                return operation, selected
 
     	return operation, selected
 
+        # Note, make sure strategy actually work first by actually running the program and trying out, comparing before trying to optimize or refactor code. Or you will cry.
+
         # Attention team: Please refer to experiment1checklist.pdf after all is said and done.
+
+        # REFACTORABLE (one day) GALORE!
